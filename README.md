@@ -12,6 +12,7 @@ JavaSparkContext sc = new JavaSparkContext(conf);
 sc.addSparkListener(new TNTSparkListener("my.app"));
 ...
 ```
+TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark witj JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
 
 # Requirements
 * JDK 1.8
