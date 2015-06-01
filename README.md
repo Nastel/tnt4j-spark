@@ -12,6 +12,18 @@ JavaSparkContext sc = new JavaSparkContext(conf);
 sc.addSparkListener(new TNTSparkListener("my.app"));
 ...
 ```
+#### Add the following arguments to your java start-up
+```
+-Dtnt4j.config=<home>/config/tnt4j.properties -Dtnt4j.token.repository=<home>/config/tnt4j-tokens.properties 
+```
+To enable automatic application dump add the following arguments:
+```
+-Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.on.exception=true -Dtnt4j.dump.provider.default=true 
+```
+Optionally you can add the following parameters to define default data center name and geo location:
+```
+-Dtnt4j.source.DATACENTER=YourDataCenterName -Dtnt4j.source.GEOADDR="Melville,NY" 
+```
 TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
 
 # Requirements
