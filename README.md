@@ -1,4 +1,4 @@
-# TNT4Spark
+## TNT4Spark
 Track and Trace for Apache Spark. TNT4Spark provides an implementation of `SparkListener` for `SparkContext`.
 TNT4Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.
 
@@ -12,6 +12,8 @@ JavaSparkContext sc = new JavaSparkContext(conf);
 sc.addSparkListener(new TNTSparkListener("my.spark.app"));
 ...
 ```
+TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
+
 #### Add the following arguments to your java start-up
 ```
 -Dtnt4j.config=<home>/config/tnt4j.properties -Dtnt4j.token.repository=<home>/config/tnt4j-tokens.properties 
@@ -24,9 +26,8 @@ Optionally you can add the following parameters to define default data center na
 ```
 -Dtnt4j.source.DATACENTER=YourDataCenterName -Dtnt4j.source.GEOADDR="Melville,NY" 
 ```
-TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
 
-# Requirements
+## Requirements
 * JDK 1.8
 * TNT4J (http://nastel.github.io/TNT4J/)
 * Apache Spark 1.2.1 or higher (https://spark.apache.org/)
