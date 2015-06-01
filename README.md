@@ -5,11 +5,11 @@ TNT4Spark allows developers to track execution, measure performance and help wit
 Using TNT4Spark is easy:
 ```java
 ...
-SparkConf conf = new SparkConf().setAppName("my.app");
+SparkConf conf = new SparkConf().setAppName("my.spark.app");
 JavaSparkContext sc = new JavaSparkContext(conf);
 
 // add TNT4Spark listener to your spark context
-sc.addSparkListener(new TNTSparkListener("my.app"));
+sc.addSparkListener(new TNTSparkListener("my.spark.app"));
 ...
 ```
 #### Add the following arguments to your java start-up
