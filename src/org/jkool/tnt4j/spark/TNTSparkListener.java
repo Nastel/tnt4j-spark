@@ -122,7 +122,7 @@ public class TNTSparkListener implements SparkListener {
     public void onJobStart(SparkListenerJobStart arg0) {
 		String name = "job/" + arg0.jobId(); 
 		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
-		activity.start(); // convert to microseconds
+		activity.start();
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
     }
@@ -143,7 +143,7 @@ public class TNTSparkListener implements SparkListener {
     public void onStageSubmitted(SparkListenerStageSubmitted arg0) {
 		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId(); 
 		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
-		activity.start(); // convert to microseconds
+		activity.start(); 
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
     }
@@ -174,7 +174,7 @@ public class TNTSparkListener implements SparkListener {
     public void onTaskStart(SparkListenerTaskStart arg0) {
 		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id(); 
 		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
-		activity.start(); // convert to microseconds
+		activity.start(); 
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
     }
