@@ -11,6 +11,7 @@
 
   <property name="src"       value="src"/>
   <property name="lib"       value="lib"/>
+  <property name="config"    value="config"/>
   <property name="classes"   value="classes"/>
   <property name="jar"       value="${project-build}/tnt4-spark.jar"/>
 
@@ -32,8 +33,20 @@
 		</fileset>
 	</copy>
 
+	<copy todir="${project-build}/config">
+      <fileset dir="${config}">
+        <include name="*.properties"/>
+      </fileset>
+    </copy>
+
 	<copy todir="${project-build}/lib">
       <fileset dir="${lib}">
+        <include name="tnt4j*.jar"/>
+      </fileset>
+    </copy>
+	
+	<copy todir="${project-build}/lib/depend">
+      <fileset dir="${lib}/depend">
         <include name="*.jar"/>
       </fileset>
     </copy>
