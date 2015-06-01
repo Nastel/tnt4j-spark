@@ -40,6 +40,14 @@ import com.nastel.jkool.tnt4j.core.OpLevel;
 import com.nastel.jkool.tnt4j.tracker.TrackingActivity;
 import com.nastel.jkool.tnt4j.tracker.TrackingEvent;
 
+/**
+ * This class implements SparkListener interface and tracks behavior of Spark jobs using
+ * TNT4J API. All spark run-time events are correlated together using spark application id as
+ * a correlator. Developers may extend this class and add other correlators if needed.
+ * 
+ * @version $Revision: 1 $
+ * 
+ */
 public class TNTSparkListener implements SparkListener {
 
 	private ConcurrentHashMap<String, TrackingActivity> activityMap = new ConcurrentHashMap<String, TrackingActivity>(89);
