@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Tnt4spark by Nastel</title>
+    <title>TNT4Spark by Nastel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,7 +11,7 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Tnt4spark</h1>
+      <h1 class="project-name">TNT4Spark</h1>
       <h2 class="project-tagline">Track and Trace for Apache Spark</h2>
       <a href="https://github.com/Nastel/TNT4Spark" class="btn">View on GitHub</a>
       <a href="https://github.com/Nastel/TNT4Spark/zipball/master" class="btn">Download .zip</a>
@@ -20,12 +20,27 @@
 
     <section class="main-content">
       <h2>
-<a id="tnt4spark" class="anchor" href="#tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>TNT4Spark</h2>
+<a id="about-tnt4spark" class="anchor" href="#about-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>About TNT4Spark</h2>
 
 <p>Track and Trace for Apache Spark. TNT4Spark provides an implementation of <code>SparkListener</code> for <code>SparkContext</code>.
 TNT4Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.</p>
 
-<p>Using TNT4Spark is easy:</p>
+<h3>
+<a id="why-tnt4spark" class="anchor" href="#why-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why TNT4Spark?</h3>
+
+<ul>
+<li>Track and Trace Spark application execution @ runtime</li>
+<li>Measure performance &amp; execution of stages, jobs, tasks</li>
+<li>Detect and report task failures during execution</li>
+<li>Visualize your Spark application execution (via JESL and jkoolcloud integration)</li>
+</ul>
+
+<p>NOTE: See <a href="https://www.jkoolcloud.com">https://www.jkoolcloud.com</a> and (JESL) <a href="http://nastel.github.io/JESL/">http://nastel.github.io/JESL/</a> to vizualize Spark application execution.</p>
+
+<h3>
+<a id="using-tnt4spark" class="anchor" href="#using-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using TNT4Spark</h3>
+
+<p>TNT4Spark is easy, just include a few lines into your application:</p>
 
 <div class="highlight highlight-java"><pre><span class="pl-c1">...</span>
 <span class="pl-smi">SparkConf</span> conf <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SparkConf</span>()<span class="pl-k">.</span>setAppName(<span class="pl-s"><span class="pl-pds">"</span>my.spark.app<span class="pl-pds">"</span></span>);
@@ -34,6 +49,35 @@ TNT4Spark allows developers to track execution, measure performance and help wit
 <span class="pl-c">// add TNT4Spark listener to your spark context</span>
 sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <span class="pl-smi">TNTSparkListener</span>(<span class="pl-s"><span class="pl-pds">"</span>my.spark.app<span class="pl-pds">"</span></span>));
 <span class="pl-c1">...</span></pre></div>
+
+<p>Make sure you edit <code>config/tnt4j.properties</code> and specify TNT4J configuration for your application <code>my.spark.app</code>.</p>
+
+<pre><code>; Stanza used for Spark Applications
+; replace `my.spark.app` with the name used when creating TNTSparkListener
+{
+    source: my.spark.app
+    source.factory: com.nastel.jkool.tnt4j.source.SourceFactoryImpl
+    source.factory.GEOADDR: NewYork
+    source.factory.DATACENTER: HQDC
+    source.factory.RootFQN: SERVER=?#DATACENTER=?#GEOADDR=? 
+
+    tracker.factory: com.nastel.jkool.tnt4j.tracker.DefaultTrackerFactory
+    dump.sink.factory: com.nastel.jkool.tnt4j.dump.DefaultDumpSinkFactory
+    event.sink.factory.EventSinkFactory: com.nastel.jkool.tnt4j.logger.Log4JEventSinkFactory
+
+    ; Configure default sink filter based on level and time (elapsed/wait)
+    event.sink.factory.Filter: com.nastel.jkool.tnt4j.filters.EventLevelTimeFilter
+    event.sink.factory.Filter.Level: TRACE
+    ; Uncomment lines below to filter out events based on elapsed time and wait time
+    ; Timed event/activities greater or equal to given values will be logged
+    ;event.sink.factory.Filter.ElapsedUsec: 100
+    ;event.sink.factory.Filter.WaitUsec: 100
+
+    event.formatter: com.nastel.jkool.tnt4j.format.SimpleFormatter
+    tracking.selector: com.nastel.jkool.tnt4j.selector.DefaultTrackingSelector
+    tracking.selector.Repository: com.nastel.jkool.tnt4j.repository.FileTokenRepository
+}
+</code></pre>
 
 <p>TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (<a href="http://nastel.github.io/JESL/">http://nastel.github.io/JESL/</a>) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see <a href="https://www.jkoolcloud.com">https://www.jkoolcloud.com</a>). </p>
 
@@ -63,7 +107,7 @@ sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <spa
 </ul>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Nastel/TNT4Spark">Tnt4spark</a> is maintained by <a href="https://github.com/Nastel">Nastel</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/Nastel/TNT4Spark">TNT4Spark</a> is maintained by <a href="https://github.com/Nastel">Nastel</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
