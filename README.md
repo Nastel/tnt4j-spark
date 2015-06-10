@@ -2,6 +2,13 @@
 Track and Trace for Apache Spark. TNT4Spark provides an implementation of `SparkListener` for `SparkContext`.
 TNT4Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.
 
+### Why TNT4Spark?
+* Track and Trace Spark application execution @ runtime
+* Measure execution of stages, jobs & tasks
+* Detect and report task failures during execution
+* Visualize your Spark application execution (via JESL and jkoolcloud integration)
+
+### Using TNT4Spark
 Using TNT4Spark is easy:
 ```java
 ...
