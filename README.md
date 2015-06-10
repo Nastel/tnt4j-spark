@@ -4,9 +4,11 @@ TNT4Spark allows developers to track execution, measure performance and help wit
 
 ### Why TNT4Spark?
 * Track and Trace Spark application execution @ runtime
-* Measure execution of stages, jobs & tasks
+* Measure performance & execution of stages, jobs, tasks
 * Detect and report task failures during execution
 * Visualize your Spark application execution (via JESL and jkoolcloud integration)
+
+NOTE: See https://www.jkoolcloud.com and (JESL) http://nastel.github.io/JESL/ to vizualize Spark application execution.
 
 ### Using TNT4Spark
 Using TNT4Spark is easy:
