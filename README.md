@@ -34,7 +34,7 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	
 	tracker.factory: com.nastel.jkool.tnt4j.tracker.DefaultTrackerFactory
 	dump.sink.factory: com.nastel.jkool.tnt4j.dump.DefaultDumpSinkFactory
-	event.sink.factory.EventSinkFactory: com.nastel.jkool.tnt4j.logger.Log4JEventSinkFactory
+	event.sink.factory: com.nastel.jkool.tnt4j.sink.FileEventSinkFactory
 
 	; Configure default sink filter based on level and time (elapsed/wait)
 	event.sink.factory.Filter: com.nastel.jkool.tnt4j.filters.EventLevelTimeFilter
