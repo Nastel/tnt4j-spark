@@ -1,8 +1,8 @@
-## About TNT4Spark
-Track and Trace for Apache Spark. TNT4Spark provides an implementation of `SparkListener` for `SparkContext`.
-TNT4Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.
+## About TNT4J-Spark
+Track and Trace for Apache Spark. TNT4J-Spark provides an implementation of `SparkListener` for `SparkContext`.
+TNT4J-Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.
 
-### Why TNT4Spark?
+### Why TNT4J-Spark?
 * Track and Trace Spark application execution @ runtime
 * Measure performance & execution of stages, jobs, tasks
 * Detect and report task failures during execution
@@ -10,14 +10,14 @@ TNT4Spark allows developers to track execution, measure performance and help wit
 
 NOTE: See https://www.jkoolcloud.com and (JESL) http://nastel.github.io/JESL/ to vizualize Spark application execution.
 
-### Using TNT4Spark
-TNT4Spark is easy, just include a few lines into your application:
+### Using TNT4J-Spark
+TNT4J-Spark is easy, just include a few lines into your application:
 ```java
 ...
 SparkConf conf = new SparkConf().setAppName("my.spark.app");
 JavaSparkContext sc = new JavaSparkContext(conf);
 
-// add TNT4Spark listener to your spark context
+// add TNT4J-Spark listener to your spark context
 sc.addSparkListener(new TNTSparkListener("my.spark.app"));
 ...
 ```
@@ -49,7 +49,7 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	tracking.selector.Repository: com.nastel.jkool.tnt4j.repository.FileTokenRepository
 }
 ```
-TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4Spark into jKool Cloud -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
+TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4J-Spark into jKool Cloud -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
 
 #### Add the following arguments to your java start-up
 ```

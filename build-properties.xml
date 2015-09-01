@@ -1,9 +1,9 @@
 <!-- This file is intended to be included by all build.xml files for each
      project.  Each build project MUST set the property "janusroot"
 -->
-<project name="TNT4SparkProps">
+<project name="BuildProps">
   <!-- Installation package directories -->
-  <property name="project-build"       value="${basedir}/../build/tnt4spark"/>
+  <property name="project-build"       value="${basedir}/../build/tnt4j-spark"/>
   <property name="project-install"     value="${project-build}/install"/>
   
   <!-- Default compilation settings -->
