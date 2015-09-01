@@ -2,31 +2,31 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>TNT4Spark by Nastel</title>
+    <title>TNT4J-Spark by Nastel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">TNT4Spark</h1>
+      <h1 class="project-name">TNT4J-Spark</h1>
       <h2 class="project-tagline">Track and Trace for Apache Spark</h2>
-      <a href="https://github.com/Nastel/TNT4Spark" class="btn">View on GitHub</a>
-      <a href="https://github.com/Nastel/TNT4Spark/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/Nastel/TNT4Spark/tarball/master" class="btn">Download .tar.gz</a>
+      <a href="https://github.com/Nastel/tnt4j-spark" class="btn">View on GitHub</a>
+      <a href="https://github.com/Nastel/tnt4j-spark/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Nastel/tnt4j-spark/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
       <h2>
-<a id="about-tnt4spark" class="anchor" href="#about-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>About TNT4Spark</h2>
+<a id="about-tnt4j-spark" class="anchor" href="#about-tnt4j-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>About TNT4J-Spark</h2>
 
-<p>Track and Trace for Apache Spark. TNT4Spark provides an implementation of <code>SparkListener</code> for <code>SparkContext</code>.
-TNT4Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.</p>
+<p>Track and Trace for Apache Spark. TNT4J-Spark provides an implementation of <code>SparkListener</code> for <code>SparkContext</code>.
+TNT4J-Spark allows developers to track execution, measure performance and help with diagnostics of your Spark applications.</p>
 
 <h3>
-<a id="why-tnt4spark" class="anchor" href="#why-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why TNT4Spark?</h3>
+<a id="why-tnt4j-spark" class="anchor" href="#why-tnt4j-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why TNT4J-Spark?</h3>
 
 <ul>
 <li>Track and Trace Spark application execution @ runtime</li>
@@ -38,15 +38,15 @@ TNT4Spark allows developers to track execution, measure performance and help wit
 <p>NOTE: See <a href="https://www.jkoolcloud.com">https://www.jkoolcloud.com</a> and (JESL) <a href="http://nastel.github.io/JESL/">http://nastel.github.io/JESL/</a> to vizualize Spark application execution.</p>
 
 <h3>
-<a id="using-tnt4spark" class="anchor" href="#using-tnt4spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using TNT4Spark</h3>
+<a id="using-tnt4j-spark" class="anchor" href="#using-tnt4j-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using TNT4J-Spark</h3>
 
-<p>TNT4Spark is easy, just include a few lines into your application:</p>
+<p>TNT4J-Spark is easy, just include a few lines into your application:</p>
 
 <div class="highlight highlight-java"><pre><span class="pl-c1">...</span>
 <span class="pl-smi">SparkConf</span> conf <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SparkConf</span>()<span class="pl-k">.</span>setAppName(<span class="pl-s"><span class="pl-pds">"</span>my.spark.app<span class="pl-pds">"</span></span>);
 <span class="pl-smi">JavaSparkContext</span> sc <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">JavaSparkContext</span>(conf);
 
-<span class="pl-c">// add TNT4Spark listener to your spark context</span>
+<span class="pl-c">// add TNT4J-Spark listener to your spark context</span>
 sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <span class="pl-smi">TNTSparkListener</span>(<span class="pl-s"><span class="pl-pds">"</span>my.spark.app<span class="pl-pds">"</span></span>));
 <span class="pl-c1">...</span></pre></div>
 
@@ -63,7 +63,7 @@ sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <spa
 
     tracker.factory: com.nastel.jkool.tnt4j.tracker.DefaultTrackerFactory
     dump.sink.factory: com.nastel.jkool.tnt4j.dump.DefaultDumpSinkFactory
-    event.sink.factory.EventSinkFactory: com.nastel.jkool.tnt4j.logger.Log4JEventSinkFactory
+    event.sink.factory: com.nastel.jkool.tnt4j.sink.FileEventSinkFactory
 
     ; Configure default sink filter based on level and time (elapsed/wait)
     event.sink.factory.Filter: com.nastel.jkool.tnt4j.filters.EventLevelTimeFilter
@@ -79,7 +79,7 @@ sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <spa
 }
 </code></pre>
 
-<p>TNT4Spark uses TNT4J API to track job execution. Combining TNT4Spark with JESL (<a href="http://nastel.github.io/JESL/">http://nastel.github.io/JESL/</a>) lets developers stream data collected by TNT4Spark into a jKool -- real-time streaming and vizualization platform (see <a href="https://www.jkoolcloud.com">https://www.jkoolcloud.com</a>). </p>
+<p>TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (<a href="http://nastel.github.io/JESL/">http://nastel.github.io/JESL/</a>) lets developers stream data collected by TNT4J-Spark into jKool Cloud -- real-time streaming and vizualization platform (see <a href="https://www.jkoolcloud.com">https://www.jkoolcloud.com</a>). </p>
 
 <h4>
 <a id="add-the-following-arguments-to-your-java-start-up" class="anchor" href="#add-the-following-arguments-to-your-java-start-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add the following arguments to your java start-up</h4>
@@ -107,7 +107,7 @@ sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <spa
 </ul>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Nastel/TNT4Spark">TNT4Spark</a> is maintained by <a href="https://github.com/Nastel">Nastel</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/Nastel/tnt4j-spark">TNT4J-Spark</a> is maintained by <a href="https://github.com/Nastel">Nastel</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
@@ -117,4 +117,3 @@ sc<span class="pl-k">.</span>addSparkListener(<span class="pl-k">new</span> <spa
   
   </body>
 </html>
-
