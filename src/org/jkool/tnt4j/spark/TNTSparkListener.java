@@ -69,7 +69,7 @@ public class TNTSparkListener implements SparkListener {
 	@Override
     public void onApplicationStart(SparkListenerApplicationStart arg0) {
 		String appid = arg0.appName() + "/" + arg0.appId().get();
-		applActivity = logger.newActivity(OpLevel.SUCCESS, appid);
+		applActivity = logger.newActivity(OpLevel.INFO, appid);
 		applActivity.setUser(arg0.sparkUser());
 		applActivity.setCorrelator(arg0.appId().get());
 		applActivity.start(arg0.time()*1000); // convert to microseconds
@@ -78,7 +78,7 @@ public class TNTSparkListener implements SparkListener {
 	@Override
     public void onBlockManagerAdded(SparkListenerBlockManagerAdded arg0) {
 		String name = "block-manager/" + arg0.blockManagerId().toString();
-		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
+		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
 		activity.start(arg0.time()*1000); // convert to microseconds
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
@@ -121,7 +121,7 @@ public class TNTSparkListener implements SparkListener {
 	@Override
     public void onJobStart(SparkListenerJobStart arg0) {
 		String name = "job/" + arg0.jobId(); 
-		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
+		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
 		activity.start();
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
@@ -142,7 +142,7 @@ public class TNTSparkListener implements SparkListener {
 	@Override
     public void onStageSubmitted(SparkListenerStageSubmitted arg0) {
 		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId(); 
-		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
+		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
 		activity.start(); 
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
@@ -173,7 +173,7 @@ public class TNTSparkListener implements SparkListener {
 	@Override
     public void onTaskStart(SparkListenerTaskStart arg0) {
 		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id(); 
-		TrackingActivity activity = logger.newActivity(OpLevel.SUCCESS, name);
+		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
 		activity.start(); 
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
