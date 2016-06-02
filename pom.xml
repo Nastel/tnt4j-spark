@@ -7,7 +7,7 @@
   <version>0.1</version>
   <packaging>jar</packaging>
 
-  <name>syslogd</name>
+  <name>tnt4j-spark</name>
   <url>http://www.jkoolcloud.com/</url>
   <description>Data Streaming, Data Analytics</description>
   <licenses>
