@@ -27,26 +27,26 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 ; replace `my.spark.app` with the name used when creating TNTSparkListener
 {
 	source: my.spark.app
-	source.factory: com.nastel.jkool.tnt4j.source.SourceFactoryImpl
+	source.factory: com.jkoolcloud.tnt4j.source.SourceFactoryImpl
 	source.factory.GEOADDR: NewYork
 	source.factory.DATACENTER: HQDC
 	source.factory.RootFQN: SERVER=?#DATACENTER=?#GEOADDR=?	
 	
-	tracker.factory: com.nastel.jkool.tnt4j.tracker.DefaultTrackerFactory
-	dump.sink.factory: com.nastel.jkool.tnt4j.dump.DefaultDumpSinkFactory
-	event.sink.factory: com.nastel.jkool.tnt4j.sink.FileEventSinkFactory
+	tracker.factory: com.jkoolcloud.tnt4j.tracker.DefaultTrackerFactory
+	dump.sink.factory: com.jkoolcloud.tnt4j.dump.DefaultDumpSinkFactory
+	event.sink.factory: com.jkoolcloud.tnt4j.sink.FileEventSinkFactory
 
 	; Configure default sink filter based on level and time (elapsed/wait)
-	event.sink.factory.Filter: com.nastel.jkool.tnt4j.filters.EventLevelTimeFilter
+	event.sink.factory.Filter: com.jkoolcloud.tnt4j.filters.EventLevelTimeFilter
 	event.sink.factory.Filter.Level: TRACE
 	; Uncomment lines below to filter out events based on elapsed time and wait time
 	; Timed event/activities greater or equal to given values will be logged
 	;event.sink.factory.Filter.ElapsedUsec: 100
 	;event.sink.factory.Filter.WaitUsec: 100
 	
-	event.formatter: com.nastel.jkool.tnt4j.format.SimpleFormatter
-	tracking.selector: com.nastel.jkool.tnt4j.selector.DefaultTrackingSelector
-	tracking.selector.Repository: com.nastel.jkool.tnt4j.repository.FileTokenRepository
+	event.formatter: com.jkoolcloud.tnt4j.format.SimpleFormatter
+	tracking.selector: com.jkoolcloud.tnt4j.selector.DefaultTrackingSelector
+	tracking.selector.Repository: com.jkoolcloud.tnt4j.repository.FileTokenRepository
 }
 ```
 TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4J-Spark into jKool Cloud -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 

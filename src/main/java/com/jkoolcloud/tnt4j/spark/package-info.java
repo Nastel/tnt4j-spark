@@ -18,4 +18,4 @@
  * @author albert
  *
  */
-package org.jkool.tnt4j.spark;
+package com.jkoolcloud.tnt4j.spark;
