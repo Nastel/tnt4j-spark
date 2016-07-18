@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.jkoolcloud.tnt4j</groupId>
-  <artifactId>spark</artifactId>
+  <artifactId>tnt4j-spark</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
   <name>tnt4j-spark</name>
   <url>http://www.jkoolcloud.com/</url>
-  <description>Data Streaming, Data Analytics</description>
+  <description>Spark Stats Listener and streaming over TNT4J</description>
   <licenses>
   <license>
     <name>The Apache License, Version 2.0</name>
