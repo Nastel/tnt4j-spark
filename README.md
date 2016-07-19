@@ -34,7 +34,7 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	
 	tracker.factory: com.jkoolcloud.tnt4j.tracker.DefaultTrackerFactory
 	dump.sink.factory: com.jkoolcloud.tnt4j.dump.DefaultDumpSinkFactory
-	event.sink.factory: com.jkoolcloud.tnt4j.sink.FileEventSinkFactory
+	event.sink.factory: com.jkoolcloud.tnt4j.sink.impl.FileEventSinkFactory
 
 	; Configure default sink filter based on level and time (elapsed/wait)
 	event.sink.factory.Filter: com.jkoolcloud.tnt4j.filters.EventLevelTimeFilter
