@@ -18,21 +18,7 @@ package com.jkoolcloud.tnt4j.spark;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.spark.scheduler.SparkListener;
-import org.apache.spark.scheduler.SparkListenerApplicationEnd;
-import org.apache.spark.scheduler.SparkListenerApplicationStart;
-import org.apache.spark.scheduler.SparkListenerBlockManagerAdded;
-import org.apache.spark.scheduler.SparkListenerBlockManagerRemoved;
-import org.apache.spark.scheduler.SparkListenerEnvironmentUpdate;
-import org.apache.spark.scheduler.SparkListenerExecutorMetricsUpdate;
-import org.apache.spark.scheduler.SparkListenerJobEnd;
-import org.apache.spark.scheduler.SparkListenerJobStart;
-import org.apache.spark.scheduler.SparkListenerStageCompleted;
-import org.apache.spark.scheduler.SparkListenerStageSubmitted;
-import org.apache.spark.scheduler.SparkListenerTaskEnd;
-import org.apache.spark.scheduler.SparkListenerTaskGettingResult;
-import org.apache.spark.scheduler.SparkListenerTaskStart;
-import org.apache.spark.scheduler.SparkListenerUnpersistRDD;
+import org.apache.spark.scheduler.*;
 
 import com.jkoolcloud.tnt4j.TrackingLogger;
 import com.jkoolcloud.tnt4j.core.OpCompCode;
@@ -41,9 +27,9 @@ import com.jkoolcloud.tnt4j.tracker.TrackingActivity;
 import com.jkoolcloud.tnt4j.tracker.TrackingEvent;
 
 /**
- * This class implements SparkListener interface and tracks behavior of Spark jobs using
- * TNT4J API. All spark run-time events are correlated together using spark application id as
- * a correlator. Developers may extend this class and add other correlators if needed.
+ * This class implements SparkListener interface and tracks behavior of Spark jobs using TNT4J API. All spark run-time
+ * events are correlated together using spark application id as a correlator. Developers may extend this class and add
+ * other correlators if needed.
  * 
  * @version $Revision: 1 $
  * 
@@ -53,62 +39,80 @@ public class TNTSparkListener implements SparkListener {
 	private ConcurrentHashMap<String, TrackingActivity> activityMap = new ConcurrentHashMap<String, TrackingActivity>(89);
 	TrackingLogger logger;
 	TrackingActivity applActivity;
-	
+
 	public TNTSparkListener(String name) throws IOException {
 		logger = TrackingLogger.getInstance(name);
 		logger.setKeepThreadContext(false);
 		logger.open();
 	}
-	
+
 	@Override
-    public void onApplicationEnd(SparkListenerApplicationEnd arg0) {
+	public void onApplicationEnd(SparkListenerApplicationEnd arg0) {
 		applActivity.stop(arg0.time());
 		logger.tnt(applActivity);
 	}
 
 	@Override
-    public void onApplicationStart(SparkListenerApplicationStart arg0) {
+	public void onApplicationStart(SparkListenerApplicationStart arg0) {
 		String appid = arg0.appName() + "/" + arg0.appId().get();
 		applActivity = logger.newActivity(OpLevel.INFO, appid);
 		applActivity.setUser(arg0.sparkUser());
 		applActivity.setCorrelator(arg0.appId().get());
-		applActivity.start(arg0.time()*1000); // convert to microseconds
+		applActivity.start(arg0.time() * 1000); // convert to microseconds
 	}
 
 	@Override
-    public void onBlockManagerAdded(SparkListenerBlockManagerAdded arg0) {
+	public void onBlockManagerAdded(SparkListenerBlockManagerAdded arg0) {
 		String name = "block-manager/" + arg0.blockManagerId().toString();
 		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
-		activity.start(arg0.time()*1000); // convert to microseconds
+		activity.start(arg0.time() * 1000); // convert to microseconds
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
-    }
+	}
 
 	@Override
-    public void onBlockManagerRemoved(SparkListenerBlockManagerRemoved arg0) {
+	public void onBlockManagerRemoved(SparkListenerBlockManagerRemoved arg0) {
 		String name = arg0.blockManagerId().toString();
 		TrackingActivity activity = activityMap.get(name);
 		if (activity != null) {
-			activity.stop(arg0.time()*1000); // convert to microseconds
+			activity.stop(arg0.time() * 1000); // convert to microseconds
 			activityMap.remove(name);
 			logger.tnt(activity);
 		}
-    }
+	}
 
 	@Override
-    public void onEnvironmentUpdate(SparkListenerEnvironmentUpdate arg0) {
+	public void onEnvironmentUpdate(SparkListenerEnvironmentUpdate arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onEnvironmentUpdate", applActivity.getCorrelator(), "onEnvironmentUpdate: {0}", arg0);
 		logger.tnt(event);
 	}
 
 	@Override
-    public void onExecutorMetricsUpdate(SparkListenerExecutorMetricsUpdate arg0) {
+	public void onExecutorMetricsUpdate(SparkListenerExecutorMetricsUpdate arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorMetricsUpdate", applActivity.getCorrelator(), "onExecutorMetricsUpdate: {0}", arg0);
 		logger.tnt(event);
-    }
+	}
 
 	@Override
-    public void onJobEnd(SparkListenerJobEnd arg0) {
+	public void onExecutorAdded(SparkListenerExecutorAdded arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorAdded", applActivity.getCorrelator(), "onExecutorAdded: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onExecutorRemoved(SparkListenerExecutorRemoved arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorRemoved", applActivity.getCorrelator(), "onExecutorRemoved: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onBlockUpdated(SparkListenerBlockUpdated arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onBlockUpdated", applActivity.getCorrelator(), "onBlockUpdated: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onJobEnd(SparkListenerJobEnd arg0) {
 		String name = "job/" + arg0.jobId();
 		TrackingActivity activity = activityMap.get(name);
 		if (activity != null) {
@@ -116,20 +120,20 @@ public class TNTSparkListener implements SparkListener {
 			activityMap.remove(name);
 			logger.tnt(activity);
 		}
-    }
+	}
 
 	@Override
-    public void onJobStart(SparkListenerJobStart arg0) {
-		String name = "job/" + arg0.jobId(); 
+	public void onJobStart(SparkListenerJobStart arg0) {
+		String name = "job/" + arg0.jobId();
 		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
 		activity.start();
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
-    }
+	}
 
 	@Override
-    public void onStageCompleted(SparkListenerStageCompleted arg0) {
-		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId(); 
+	public void onStageCompleted(SparkListenerStageCompleted arg0) {
+		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId();
 		TrackingActivity activity = activityMap.get(name);
 		if (activity != null) {
 			activity.stop();
@@ -137,20 +141,20 @@ public class TNTSparkListener implements SparkListener {
 			activityMap.remove(name);
 			logger.tnt(activity);
 		}
-    }
+	}
 
 	@Override
-    public void onStageSubmitted(SparkListenerStageSubmitted arg0) {
-		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId(); 
+	public void onStageSubmitted(SparkListenerStageSubmitted arg0) {
+		String name = "stage/" + arg0.stageInfo().name() + "/" + arg0.stageInfo().stageId();
 		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
-		activity.start(); 
+		activity.start();
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
-    }
+	}
 
 	@Override
-    public void onTaskEnd(SparkListenerTaskEnd arg0) {
-		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id(); 
+	public void onTaskEnd(SparkListenerTaskEnd arg0) {
+		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id();
 		TrackingActivity activity = activityMap.get(name);
 		if (activity != null) {
 			activity.stop();
@@ -162,26 +166,26 @@ public class TNTSparkListener implements SparkListener {
 			activityMap.remove(name);
 			logger.tnt(activity);
 		}
-    }
+	}
 
 	@Override
-    public void onTaskGettingResult(SparkListenerTaskGettingResult arg0) {
+	public void onTaskGettingResult(SparkListenerTaskGettingResult arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onTaskGettingResult", applActivity.getCorrelator(), "onTaskGettingResult: {0}", arg0);
 		logger.tnt(event);
-    }
+	}
 
 	@Override
-    public void onTaskStart(SparkListenerTaskStart arg0) {
-		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id(); 
+	public void onTaskStart(SparkListenerTaskStart arg0) {
+		String name = "task/" + arg0.stageId() + "/" + arg0.taskInfo().id();
 		TrackingActivity activity = logger.newActivity(OpLevel.INFO, name);
-		activity.start(); 
+		activity.start();
 		activity.setCorrelator(applActivity.getCorrelator());
 		activityMap.put(name, activity);
-    }
+	}
 
 	@Override
-    public void onUnpersistRDD(SparkListenerUnpersistRDD arg0) {
+	public void onUnpersistRDD(SparkListenerUnpersistRDD arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onUnpersistRDD", applActivity.getCorrelator(), "onUnpersistRDD: {0}", arg0);
 		logger.tnt(event);
-    }
+	}
 }
