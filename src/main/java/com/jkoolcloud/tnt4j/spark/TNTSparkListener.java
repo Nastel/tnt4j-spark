@@ -34,7 +34,7 @@ import com.jkoolcloud.tnt4j.tracker.TrackingEvent;
  * @version $Revision: 1 $
  * 
  */
-public class TNTSparkListener implements SparkListener {
+public class TNTSparkListener implements SparkListenerInterface {
 
 	private ConcurrentHashMap<String, TrackingActivity> activityMap = new ConcurrentHashMap<String, TrackingActivity>(89);
 	TrackingLogger logger;
@@ -83,31 +83,71 @@ public class TNTSparkListener implements SparkListener {
 
 	@Override
 	public void onEnvironmentUpdate(SparkListenerEnvironmentUpdate arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onEnvironmentUpdate", applActivity.getCorrelator(), "onEnvironmentUpdate: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onEnvironmentUpdate", applActivity.getCorrelator(),
+				"onEnvironmentUpdate: {0}", arg0);
 		logger.tnt(event);
 	}
 
 	@Override
 	public void onExecutorMetricsUpdate(SparkListenerExecutorMetricsUpdate arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorMetricsUpdate", applActivity.getCorrelator(), "onExecutorMetricsUpdate: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorMetricsUpdate", applActivity.getCorrelator(),
+				"onExecutorMetricsUpdate: {0}", arg0);
 		logger.tnt(event);
 	}
 
 	@Override
 	public void onExecutorAdded(SparkListenerExecutorAdded arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorAdded", applActivity.getCorrelator(), "onExecutorAdded: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorAdded", applActivity.getCorrelator(),
+				"onExecutorAdded: {0}", arg0);
 		logger.tnt(event);
 	}
 
 	@Override
 	public void onExecutorRemoved(SparkListenerExecutorRemoved arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorRemoved", applActivity.getCorrelator(), "onExecutorRemoved: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorRemoved", applActivity.getCorrelator(),
+				"onExecutorRemoved: {0}", arg0);
 		logger.tnt(event);
 	}
 
 	@Override
 	public void onBlockUpdated(SparkListenerBlockUpdated arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onBlockUpdated", applActivity.getCorrelator(), "onBlockUpdated: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onBlockUpdated", applActivity.getCorrelator(),
+				"onBlockUpdated: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onExecutorBlacklisted(SparkListenerExecutorBlacklisted arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorBlacklisted", applActivity.getCorrelator(),
+				"onExecutorBlacklisted: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onExecutorUnblacklisted(SparkListenerExecutorUnblacklisted arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorUnblacklisted", applActivity.getCorrelator(),
+				"onExecutorUnblacklisted: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onNodeBlacklisted(SparkListenerNodeBlacklisted arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onNodeBlacklisted", applActivity.getCorrelator(),
+				"onNodeBlacklisted: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onNodeUnblacklisted(SparkListenerNodeUnblacklisted arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onNodeUnblacklisted", applActivity.getCorrelator(),
+				"onNodeUnblacklisted: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onOtherEvent(SparkListenerEvent arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onOtherEvent", applActivity.getCorrelator(),
+				"onOtherEvent: {0}", arg0);
 		logger.tnt(event);
 	}
 
@@ -170,7 +210,8 @@ public class TNTSparkListener implements SparkListener {
 
 	@Override
 	public void onTaskGettingResult(SparkListenerTaskGettingResult arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onTaskGettingResult", applActivity.getCorrelator(), "onTaskGettingResult: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onTaskGettingResult", applActivity.getCorrelator(),
+				"onTaskGettingResult: {0}", arg0);
 		logger.tnt(event);
 	}
 
@@ -185,7 +226,8 @@ public class TNTSparkListener implements SparkListener {
 
 	@Override
 	public void onUnpersistRDD(SparkListenerUnpersistRDD arg0) {
-		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onUnpersistRDD", applActivity.getCorrelator(), "onUnpersistRDD: {0}", arg0);
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onUnpersistRDD", applActivity.getCorrelator(),
+				"onUnpersistRDD: {0}", arg0);
 		logger.tnt(event);
 	}
 }
