@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 JKOOL, LLC.
+ * Copyright 2014-2018 JKOOL, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,8 @@ import com.jkoolcloud.tnt4j.tracker.TrackingEvent;
  */
 public class TNTSparkListener implements SparkListenerInterface {
 
-	private ConcurrentHashMap<String, TrackingActivity> activityMap = new ConcurrentHashMap<String, TrackingActivity>(89);
+	private ConcurrentHashMap<String, TrackingActivity> activityMap = new ConcurrentHashMap<String, TrackingActivity>(
+			89);
 	TrackingLogger logger;
 	TrackingActivity applActivity;
 
