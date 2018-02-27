@@ -49,7 +49,8 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	tracking.selector.Repository: com.jkoolcloud.tnt4j.repository.FileTokenRepository
 }
 ```
-TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream data collected by TNT4J-Spark into jKool Cloud -- real-time streaming and vizualization platform (see https://www.jkoolcloud.com). 
+TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream 
+data collected by TNT4J-Spark into [JKoolCloud](https://www.jkoolcloud.com) -- real-time streaming and visualization platform. 
 
 #### Add the following arguments to your java start-up
 ```
