@@ -6,7 +6,7 @@ TNT4J-Spark allows developers to track execution, measure performance and help w
 * Track and Trace Spark application execution @ runtime
 * Measure performance & execution of stages, jobs, tasks
 * Detect and report task failures during execution
-* Visualize your Spark application execution (via JESL and jkoolcloud integration)
+* Visualize your Spark application execution (via JESL and jKoolCloud integration)
 
 NOTE: See https://www.jkoolcloud.com and (JESL) http://nastel.github.io/JESL/ to vizualize Spark application execution.
 
@@ -50,7 +50,7 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 }
 ```
 TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream 
-data collected by TNT4J-Spark into [JKoolCloud](https://www.jkoolcloud.com) -- real-time streaming and visualization platform. 
+data collected by TNT4J-Spark into [jKoolCloud](https://www.jkoolcloud.com) -- real-time streaming and visualization platform. 
 
 #### Add the following arguments to your java start-up
 ```
