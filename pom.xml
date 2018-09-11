@@ -4,7 +4,7 @@
 
     <groupId>com.jkoolcloud.tnt4j</groupId>
     <artifactId>tnt4j-spark</artifactId>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
 
     <name>tnt4j-spark</name>
