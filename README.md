@@ -30,8 +30,8 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	source.factory: com.jkoolcloud.tnt4j.source.SourceFactoryImpl
 	source.factory.GEOADDR: NewYork
 	source.factory.DATACENTER: HQDC
-	source.factory.RootFQN: SERVER=?#DATACENTER=?#GEOADDR=?	
-	
+	source.factory.RootFQN: SERVER=?#DATACENTER=?#GEOADDR=?
+
 	tracker.factory: com.jkoolcloud.tnt4j.tracker.DefaultTrackerFactory
 	dump.sink.factory: com.jkoolcloud.tnt4j.dump.DefaultDumpSinkFactory
 	event.sink.factory: com.jkoolcloud.tnt4j.sink.impl.FileEventSinkFactory
@@ -43,14 +43,14 @@ Make sure you edit `config/tnt4j.properties` and specify TNT4J configuration for
 	; Timed event/activities greater or equal to given values will be logged
 	;event.sink.factory.Filter.ElapsedUsec: 100
 	;event.sink.factory.Filter.WaitUsec: 100
-	
+
 	event.formatter: com.jkoolcloud.tnt4j.format.SimpleFormatter
 	tracking.selector: com.jkoolcloud.tnt4j.selector.DefaultTrackingSelector
 	tracking.selector.Repository: com.jkoolcloud.tnt4j.repository.FileTokenRepository
 }
 ```
 TNT4J-Spark uses TNT4J API to track job execution. Combining TNT4J-Spark with JESL (http://nastel.github.io/JESL/) lets developers stream 
-data collected by TNT4J-Spark into [jKoolCloud](https://www.jkoolcloud.com) -- real-time streaming and visualization platform. 
+data collected by TNT4J-Spark into [jKoolCloud](https://www.jkoolcloud.com) -- real-time streaming and visualization platform.
 
 #### Add the following arguments to your java start-up
 ```
@@ -70,5 +70,4 @@ Optionally you can add the following parameters to define default data center na
 * TNT4J (http://nastel.github.io/TNT4J/)
 * Apache Spark 1.2.1 or higher (https://spark.apache.org/)
 
-Please use JCenter or Maven and dependencies will be downloaded automatically. 
-
+Please use JCenter or Maven and dependencies will be downloaded automatically.
