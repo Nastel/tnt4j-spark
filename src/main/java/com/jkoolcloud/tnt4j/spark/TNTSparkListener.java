@@ -118,6 +118,13 @@ public class TNTSparkListener implements SparkListenerInterface {
 	}
 
 	@Override
+	public void onSpeculativeTaskSubmitted(SparkListenerSpeculativeTaskSubmitted arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onSpeculativeTaskSubmitted", applActivity.getCorrelator(),
+				"onSpeculativeTaskSubmitted: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
 	public void onExecutorBlacklisted(SparkListenerExecutorBlacklisted arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorBlacklisted", applActivity.getCorrelator(),
 				"onExecutorBlacklisted: {0}", arg0);
