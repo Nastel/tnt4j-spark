@@ -132,6 +132,20 @@ public class TNTSparkListener implements SparkListenerInterface {
 	}
 
 	@Override
+	public void onExecutorBlacklistedForStage(SparkListenerExecutorBlacklistedForStage arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorBlacklistedForStage",
+				applActivity.getCorrelator(), "onExecutorBlacklistedForStage: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
+	public void onNodeBlacklistedForStage(SparkListenerNodeBlacklistedForStage arg0) {
+		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onNodeBlacklistedForStage", applActivity.getCorrelator(),
+				"onNodeBlacklistedForStage: {0}", arg0);
+		logger.tnt(event);
+	}
+
+	@Override
 	public void onExecutorUnblacklisted(SparkListenerExecutorUnblacklisted arg0) {
 		TrackingEvent event = logger.newEvent(OpLevel.INFO, "onExecutorUnblacklisted", applActivity.getCorrelator(),
 				"onExecutorUnblacklisted: {0}", arg0);
