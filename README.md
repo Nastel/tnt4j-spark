@@ -66,7 +66,7 @@ Optionally you can add the following parameters to define default data center na
 ```
 
 ## Requirements
-* JDK 1.8
+* JDK 1.8+
 * TNT4J (http://nastel.github.io/TNT4J/)
 * Apache Spark 1.2.1 or higher (https://spark.apache.org/)
 
