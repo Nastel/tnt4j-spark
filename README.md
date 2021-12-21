@@ -8,7 +8,7 @@ TNT4J-Spark allows developers to track execution, measure performance and help w
 * Detect and report task failures during execution
 * Visualize your Spark application execution (via JESL and jKoolCloud integration)
 
-NOTE: See https://www.jkoolcloud.com and (JESL) http://nastel.github.io/JESL/ to vizualize Spark application execution.
+NOTE: See https://www.jkoolcloud.com and (JESL) http://nastel.github.io/JESL/ to visualize Spark application execution.
 
 ### Using TNT4J-Spark
 TNT4J-Spark is easy, just include a few lines into your application:
@@ -60,7 +60,7 @@ To enable automatic application dump add the following arguments:
 ```
 -Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.on.exception=true -Dtnt4j.dump.provider.default=true 
 ```
-Optionally you can add the following parameters to define default data center name and geo location:
+Optionally you can add the following parameters to define default data center name and geo-location:
 ```
 -Dtnt4j.source.DATACENTER=YourDataCenterName -Dtnt4j.source.GEOADDR="Melville,NY" 
 ```
